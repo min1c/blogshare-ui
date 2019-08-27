@@ -1,0 +1,24 @@
+<div class="main">
+  <div class="comment-content">
+    {{comment.content}}<br/>
+  </div>
+  <a (click)="toggleUserReply()" id="bt">{{showUserReplyButton}}</a>
+  -
+  <a (click)="deleteComment(comment.id)" id="dt">Delete</a>
+  <br/>
+  
+  <ng-container *ngIf="showUserReplyElements">
+    <textarea rows="2" #newComment ></textarea>
+    <br/>
+    <button class="b2" (click)="postComment(newComment.value, comment.id, comment.postId); newComment.value=''">Post Reply</button><br/>
+  </ng-container>
+
+  <ng-container *ngIf="comment.replies != null">
+    <h4><a (click)="toggleReplies()" id="bt2">{{showRepliesButton}}</a></h4>
+    <ul class="comment-reply" *ngIf="showReplyElements">
+      <li *ngFor="let comment of comment.replies">
+        <app-comment-detail [comment]="comment"></app-comment-detail>
+      </li>
+    </ul>
+  </ng-container>
+</div>

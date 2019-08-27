@@ -1,0 +1,23 @@
+<div class="main" *ngIf="post">
+  <h1>Post: {{post.title}}</h1>
+  
+  <h2>Place: </h2>
+  <agm-map [latitude]="lat" [longitude]="lng">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>
+  
+  <h2>Comments: </h2>
+    <textarea rows="2" #newComment></textarea>
+    <br/>
+    <button class="b2" (click)="postComment(newComment.value, post.id); newComment.value=''">Post Comment</button>
+    <br/>
+
+
+  <ng-container *ngFor="let comment of getMapValues(commentMap)">
+    <ol class="comment-detail">
+      <li *ngIf="comment.parentId == null" >
+         <app-comment-detail [comment]="comment"></app-comment-detail>
+      </li>
+    </ol>
+  </ng-container>
+</div>

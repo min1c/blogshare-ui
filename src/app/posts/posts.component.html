@@ -1,0 +1,14 @@
+<h2>Posts</h2>
+
+<h3 *ngIf="isLoading">
+    <i>Loading posts ... </i>
+</h3>
+<h3 *ngIf="!isLoading">Select a post:</h3>
+
+<ol class="posts">
+    <li *ngFor="let post of posts">
+        <a routerLink="/post-detail/{{post.id}}">
+            <span class="badge">{{post.title}}</span>
+        </a>    
+    </li>
+</ol>
